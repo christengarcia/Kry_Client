@@ -59,7 +59,6 @@ public final class AlertMessage
                 }
                 catch (InterruptedException e)
                 {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                     Timeline fadeOutTimeline = new Timeline();

@@ -11,7 +11,6 @@ import view.rootView;
  * This class initiates the loginView, chatView and mainView
  * instances. All the related classes are located in the
  * view package.
- * @author
  */
 public class ChatClient extends Application {
     

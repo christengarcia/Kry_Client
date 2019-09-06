@@ -1,9 +1,9 @@
 package view;
 
 import Controller.ClientSetting;
-import Controller.EmoInfo;
+import Controller.EmojiInfo;
 import Controller.UserInfo;
-import Model.UserCell;
+import Model.AlertControls;
 import client.Resource;
 import client.Vars;
 import javafx.event.EventHandler;
@@ -26,7 +26,6 @@ import packets.Packet4Chat;
 
 /**
  * This class handles the GUI resources for the chatView
- * @author
  */
 public class chatView {
 
@@ -36,7 +35,7 @@ public class chatView {
     public CustomTextField chat_message = new CustomTextField();
     public ImageView emo_icon;
 
-    public ListView<UserCell> user_list = new ListView<UserCell>();
+    public ListView<AlertControls> user_list = new ListView<AlertControls>();
 
     public ContextMenu emoPopup;
 
@@ -50,9 +49,9 @@ public class chatView {
 
         user_list.prefWidthProperty().bind(chat_pane.widthProperty().multiply(0.25));
         user_list.setCursor(Cursor.HAND);
-        user_list.setCellFactory(new Callback<ListView<UserCell>, ListCell<UserCell>>() {
+        user_list.setCellFactory(new Callback<ListView<AlertControls>, ListCell<AlertControls>>() {
             @Override
-            public ListCell<UserCell> call(ListView<UserCell> listView) {
+            public ListCell<AlertControls> call(ListView<AlertControls> listView) {
                 return new UserListCell();
             }
         });
@@ -61,7 +60,7 @@ public class chatView {
         user_list.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                UserCell user_cell = user_list.getSelectionModel().getSelectedItem();
+                AlertControls user_cell = user_list.getSelectionModel().getSelectedItem();
                 settingView setting_view = new settingView();
                 setting_view.user_cell = user_cell;
                 setting_view.initView();
@@ -158,14 +157,14 @@ public class chatView {
     private void initBtns() {
         // Creates a round button for send.
         send_btn = new Button();
-        String url = Vars.logo.getURL("chatIcons/send_icon.png");
+        String url = Vars.logo.getURL("alert/send_icon.png");
         send_btn.setStyle("-fx-background-image: url('" + url + "'); ");
         send_btn.setId("roundbtn");
         send_btn.setCursor(Cursor.HAND);
 
         // Creates a round button to pop up the emoji box keyboard.
         setting_btn = new Button();
-        url = Vars.logo.getURL("chatIcons/set_icon.png");
+        url = Vars.logo.getURL("alert/set_icon.png");
         setting_btn.setStyle("-fx-background-image: url('" + url + "'); ");
         setting_btn.setId("roundbtn");
         setting_btn.setCursor(Cursor.HAND);
@@ -196,7 +195,7 @@ public class chatView {
             }
         });
 
-        // Setting
+        // Setting button actions
         setting_btn.setOnAction((evt) -> {
             settingView set_view = new settingView();
             set_view.initView();
@@ -242,109 +241,125 @@ public class chatView {
         grid.setVgap(10);
 
         // The emoji image is retrieved from the LogoManager.
-        ImageView slightly_smile = new ImageView(Vars.logo.getSlightlySmile());
-        slightly_smile.setCursor(Cursor.HAND);
-        // Action: when an emoji is chosen (by mouse click) the matching string/image
-        // emoji representation is appended to the message.
-        slightly_smile.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.slightly_smile + ":");
-        });
         ImageView smile = new ImageView(Vars.logo.getSmile());
         smile.setCursor(Cursor.HAND);
+        // Action: when an emoji is chosen (by mouse click) the matching string/image
+        // emoji representation is appended to the message.
         smile.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.smile + ":");
+            chat_message.appendText(":" + EmojiInfo.smile + ":");
         });
+
         ImageView smiley = new ImageView(Vars.logo.getSmiley());
         smiley.setCursor(Cursor.HAND);
         smiley.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.smiley + ":");
+            chat_message.appendText(":" + EmojiInfo.smiley + ":");
         });
+
+        ImageView slightly_smile = new ImageView(Vars.logo.getSlightlySmile());
+        slightly_smile.setCursor(Cursor.HAND);
+        slightly_smile.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.slightly_smile + ":");
+        });
+
         ImageView upside = new ImageView(Vars.logo.getUpside());
         upside.setCursor(Cursor.HAND);
         upside.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.upside + ":");
+            chat_message.appendText(":" + EmojiInfo.upside + ":");
         });
-        ImageView stuck_tongue = new ImageView(Vars.logo.getStuckout());
-        stuck_tongue.setCursor(Cursor.HAND);
-        stuck_tongue.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.stuck_tongue + ":");
-        });
+
         ImageView sun_glass = new ImageView(Vars.logo.getSunglass());
         sun_glass.setCursor(Cursor.HAND);
         sun_glass.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.sun_glass + ":");
+            chat_message.appendText(":" + EmojiInfo.sun_glass + ":");
         });
+
         ImageView think_face = new ImageView(Vars.logo.getThinking());
         think_face.setCursor(Cursor.HAND);
         think_face.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.think_face + ":");
+            chat_message.appendText(":" + EmojiInfo.think_face + ":");
         });
-        ImageView frowining = new ImageView(Vars.logo.getFrowining());
-        frowining.setCursor(Cursor.HAND);
-        frowining.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.frowning + ":");
+
+        ImageView stuck_tongue = new ImageView(Vars.logo.getStuckout());
+        stuck_tongue.setCursor(Cursor.HAND);
+        stuck_tongue.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.stuck_tongue + ":");
         });
-        ImageView cry = new ImageView(Vars.logo.getCry());
-        cry.setCursor(Cursor.HAND);
-        cry.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.cry + ":");
-        });
-        ImageView sob = new ImageView(Vars.logo.getSob());
-        sob.setCursor(Cursor.HAND);
-        sob.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.sob + ":");
-        });
-        ImageView angry = new ImageView(Vars.logo.getAngry());
-        angry.setCursor(Cursor.HAND);
-        angry.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.angry + ":");
-        });
-        ImageView rage = new ImageView(Vars.logo.getRage());
-        rage.setCursor(Cursor.HAND);
-        rage.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.rage + ":");
-        });
-        ImageView ok = new ImageView(Vars.logo.getOk());
-        ok.setCursor(Cursor.HAND);
-        ok.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.ok + ":");
-        });
-        ImageView thums = new ImageView(Vars.logo.getThumsup());
-        thums.setCursor(Cursor.HAND);
-        thums.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.thumbs + ":");
-        });
-        ImageView clap = new ImageView(Vars.logo.getClap());
-        clap.setCursor(Cursor.HAND);
-        clap.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.clap + ":");
-        });
+
         ImageView heart = new ImageView(Vars.logo.getHeart());
         heart.setCursor(Cursor.HAND);
         heart.setOnMouseClicked((evt) -> {
-            chat_message.appendText(":" + EmoInfo.heart + ":");
+            chat_message.appendText(":" + EmojiInfo.heart + ":");
         });
 
-        // Grid placement positions for the emoji's.
-        grid.add(slightly_smile, 0, 0, 1, 1);
-        grid.add(smile, 1, 0, 1, 1);
-        grid.add(smiley, 2, 0, 1, 1);
-        grid.add(upside, 3, 0, 1, 1);
+        ImageView clap = new ImageView(Vars.logo.getClap());
+        clap.setCursor(Cursor.HAND);
+        clap.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.clap + ":");
+        });
 
-        grid.add(stuck_tongue, 0, 1, 1, 1);
-        grid.add(sun_glass, 1, 1, 1, 1);
-        grid.add(think_face, 2, 1, 1, 1);
-        grid.add(frowining, 3, 1, 1, 1);
+        ImageView ok = new ImageView(Vars.logo.getOk());
+        ok.setCursor(Cursor.HAND);
+        ok.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.ok + ":");
+        });
 
-        grid.add(cry, 0, 3, 1, 1);
-        grid.add(sob, 1, 3, 1, 1);
-        grid.add(angry, 2, 3, 1, 1);
-        grid.add(rage, 3, 3, 1, 1);
+        ImageView thumbs = new ImageView(Vars.logo.getThumbsup());
+        thumbs.setCursor(Cursor.HAND);
+        thumbs.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.thumbs + ":");
+        });
 
-        grid.add(ok, 0, 4, 1, 1);
-        grid.add(thums, 1, 4, 1, 1);
-        grid.add(clap, 2, 4, 1, 1);
-        grid.add(heart, 3, 4, 1, 1);
+        ImageView frowning = new ImageView(Vars.logo.getFrowning());
+        frowning.setCursor(Cursor.HAND);
+        frowning.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.frowning + ":");
+        });
+
+        ImageView sob = new ImageView(Vars.logo.getSob());
+        sob.setCursor(Cursor.HAND);
+        sob.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.sob + ":");
+        });
+
+        ImageView cry = new ImageView(Vars.logo.getCry());
+        cry.setCursor(Cursor.HAND);
+        cry.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.cry + ":");
+        });
+
+        ImageView angry = new ImageView(Vars.logo.getAngry());
+        angry.setCursor(Cursor.HAND);
+        angry.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.angry + ":");
+        });
+
+        ImageView rage = new ImageView(Vars.logo.getRage());
+        rage.setCursor(Cursor.HAND);
+        rage.setOnMouseClicked((evt) -> {
+            chat_message.appendText(":" + EmojiInfo.rage + ":");
+        });
+
+        // Grid placement positions for the emoji's on emoji keyboard.
+        // First row
+        grid.add(smile, 0,0,1,1);
+        grid.add(smiley, 1,0,1,1);
+        grid.add(slightly_smile, 2,0,1,1);
+        grid.add(upside, 3,0,1,1);
+        // Second row
+        grid.add(sun_glass, 0,1,1,1);
+        grid.add(think_face, 1,1,1,1);
+        grid.add(stuck_tongue, 2,1,1,1);
+        grid.add(heart, 3,1,1,1);
+        // Third row
+        grid.add(clap, 0,3,1,1);
+        grid.add(ok, 1,3,1,1);
+        grid.add(thumbs, 2,3,1,1);
+        grid.add(frowning, 3,3,1,1);
+        // Fourth row
+        grid.add(sob, 0,4,1,1);
+        grid.add(cry, 1,4,1,1);
+        grid.add(angry, 2,4,1,1);
+        grid.add(rage, 3,4,1,1);
 
         emoPopup.getScene().setRoot(grid);
     }

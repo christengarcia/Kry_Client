@@ -6,7 +6,6 @@ import javafx.util.Duration;
 
 /**
  * This class handles the animations for the toast messages.
- * @author
  */
 public class AnimationEffect {
     public static void animation_show(Node node){

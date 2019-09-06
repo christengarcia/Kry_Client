@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.UserCell;
+import Model.AlertControls;
 import client.Vars;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -69,7 +69,7 @@ public class ClientSetting {
                             ArrayList<String> user_list = users.user_list;
                             // Add all user_item in the UserCell to each username in user_list.
                             for (String user_item : user_list) {
-                                UserCell user_cell = new UserCell(user_item, true, Vars.logo.getRingIcon());
+                                AlertControls user_cell = new AlertControls(user_item, true, Vars.logo.getRingIcon());
                                 Vars.chat_view.user_list.getItems().add(user_cell);
                                 user_noti.put(user_item, true);
                             }
@@ -82,7 +82,7 @@ public class ClientSetting {
                         Packet2ClientConnected p2 = (Packet2ClientConnected) object;
                         text = new Text(p2.clientName + " connected.\n");
                         Platform.runLater(() -> {
-                            UserCell user_cell = new UserCell(p2.clientName, true, Vars.logo.getRingIcon());
+                            AlertControls user_cell = new AlertControls(p2.clientName, true, Vars.logo.getRingIcon());
                             Vars.chat_view.user_list.getItems().add(user_cell);
                             user_noti.put(p2.clientName, true);
                             Vars.chat_view.message_area.getChildren().addAll(text);
@@ -112,7 +112,7 @@ public class ClientSetting {
                         // a specific username.
                         if (user_noti.containsKey(p4.username)) {
                             if (user_noti.get(p4.username)) {
-                                Alarm.AlarmNotification("src/main/resources/messageAlert.mp3");
+                                Alert.AlertNotification("src/main/resources/alert/messageAlert.mp3");
                             }
                         }
                     }
@@ -131,7 +131,7 @@ public class ClientSetting {
     // Message parser for emoji string representations.
     private static void parserMessage(String message) {
         String parse_msg = message;
-        List<String> emo_list = EmoInfo.getEmoList();
+        List<String> emo_list = EmojiInfo.getEmoList();
         String[] split_message = parse_msg.split("\\:");
         HBox message_box = new HBox();
         message_box.setAlignment(Pos.CENTER_LEFT);
@@ -155,38 +155,53 @@ public class ClientSetting {
     // Generates ImageView of a chosen emoji.
     private static ImageView generateEmoji(String style) {
         ImageView image_view = new ImageView();
-        if (style.equals(EmoInfo.slightly_smile)) {
-            image_view.setImage(Vars.logo.getSlightlySmile());
-        } else if (style.equals(EmoInfo.smile)) {
+        if (style.equals(EmojiInfo.smile)) {
             image_view.setImage(Vars.logo.getSmile());
-        } else if (style.equals(EmoInfo.smiley)) {
+
+        } else if (style.equals(EmojiInfo.smiley)) {
             image_view.setImage(Vars.logo.getSmiley());
-        } else if (style.equals(EmoInfo.upside)) {
+
+        } else if (style.equals(EmojiInfo.slightly_smile)) {
+            image_view.setImage(Vars.logo.getSlightlySmile());
+
+        } else if (style.equals(EmojiInfo.upside)) {
             image_view.setImage(Vars.logo.getUpside());
-        } else if (style.equals(EmoInfo.stuck_tongue)) {
-            image_view.setImage(Vars.logo.getStuckout());
-        } else if (style.equals(EmoInfo.sun_glass)) {
+
+        } else if (style.equals(EmojiInfo.sun_glass)) {
             image_view.setImage(Vars.logo.getSunglass());
-        } else if (style.equals(EmoInfo.think_face)) {
+
+        } else if (style.equals(EmojiInfo.think_face)) {
             image_view.setImage(Vars.logo.getThinking());
-        } else if (style.equals(EmoInfo.frowning)) {
-            image_view.setImage(Vars.logo.getFrowining());
-        } else if (style.equals(EmoInfo.cry)) {
-            image_view.setImage(Vars.logo.getCry());
-        } else if (style.equals(EmoInfo.sob)) {
-            image_view.setImage(Vars.logo.getSob());
-        } else if (style.equals(EmoInfo.angry)) {
-            image_view.setImage(Vars.logo.getAngry());
-        } else if (style.equals(EmoInfo.rage)) {
-            image_view.setImage(Vars.logo.getRage());
-        } else if (style.equals(EmoInfo.ok)) {
-            image_view.setImage(Vars.logo.getOk());
-        } else if (style.equals(EmoInfo.thumbs)) {
-            image_view.setImage(Vars.logo.getThumsup());
-        } else if (style.equals(EmoInfo.clap)) {
+
+        } else if (style.equals(EmojiInfo.stuck_tongue)) {
+            image_view.setImage(Vars.logo.getStuckout());
+
+        } else if (style.equals(EmojiInfo.thumbs)) {
+            image_view.setImage(Vars.logo.getThumbsup());
+
+        } else if (style.equals(EmojiInfo.clap)) {
             image_view.setImage(Vars.logo.getClap());
-        } else if (style.equals(EmoInfo.heart)) {
+
+        } else if (style.equals(EmojiInfo.ok)) {
+            image_view.setImage(Vars.logo.getOk());
+
+        } else if (style.equals(EmojiInfo.heart)) {
             image_view.setImage(Vars.logo.getHeart());
+
+        } else if (style.equals(EmojiInfo.frowning)) {
+            image_view.setImage(Vars.logo.getFrowning());
+
+        } else if (style.equals(EmojiInfo.sob)) {
+            image_view.setImage(Vars.logo.getSob());
+
+        } else if (style.equals(EmojiInfo.cry)) {
+            image_view.setImage(Vars.logo.getCry());
+
+        } else if (style.equals(EmojiInfo.angry)) {
+            image_view.setImage(Vars.logo.getAngry());
+
+        } else if (style.equals(EmojiInfo.rage)) {
+            image_view.setImage(Vars.logo.getRage());
         }
         image_view.setFitWidth(18);
         image_view.setFitHeight(18);

@@ -7,15 +7,14 @@ import java.io.File;
 
 /**
  * This class is the controller for sound notifications.
- * @author
  */
 
-public class Alarm {
+public class Alert {
 
     public static Media media;
     public static MediaPlayer alert_player;
 
-    public static void AlarmNotification(String path) {
+    public static void AlertNotification(String path) {
         try {
             media = new Media(new File(path).toURI().toURL().toString());
             alert_player = new MediaPlayer(media);

@@ -8,7 +8,6 @@ import javafx.scene.layout.StackPane;
 
 /**
  * This class handles the GUI for the GroupBox.
- * @author
  */
 public class GroupBox extends StackPane {
 

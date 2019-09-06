@@ -1,7 +1,7 @@
 package view;
 
 import Controller.ClientSetting;
-import Model.UserCell;
+import Model.AlertControls;
 import client.ChatClient;
 import client.Resource;
 import client.Vars;
@@ -38,7 +38,7 @@ public class settingView {
 
     public boolean confirm_flag = false;
     
-    public UserCell user_cell;
+    public AlertControls user_cell;
 
     // Initializes the settings view window.
     public void initView() {
@@ -55,10 +55,10 @@ public class settingView {
                 ClientSetting.user_noti.put(user_cell.username, newValue);
                 int index = Vars.chat_view.user_list.getSelectionModel().getSelectedIndex();
                 if(!newValue){
-                    UserCell updated_cell = new UserCell(user_cell.username, false, Vars.logo.getRingDisableIcon());
+                    AlertControls updated_cell = new AlertControls(user_cell.username, false, Vars.logo.getRingDisableIcon());
                     Vars.chat_view.user_list.getItems().set(index, updated_cell);
                 }else{
-                    UserCell updated_cell = new UserCell(user_cell.username, true, Vars.logo.getRingIcon());
+                    AlertControls updated_cell = new AlertControls(user_cell.username, true, Vars.logo.getRingIcon());
                     Vars.chat_view.user_list.getItems().set(index, updated_cell);
                 }
             }

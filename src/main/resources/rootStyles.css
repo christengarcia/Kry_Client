@@ -1,8 +1,8 @@
 .root {
-    -fx-background-color: linear-gradient( #000000,  #000000);
+    -fx-background-color: linear-gradient( #000000,  #000000); /* Change emoji keyboard background here */
 }
 #black_area{
-    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-background-color: linear-gradient( #000000, #000000);
 }
 #title_label{
     -fx-background-color: linear-gradient( #000000,  #000000);
@@ -127,6 +127,7 @@
     -fx-border-color:  #58595a #58595a #58595a #58595a;
     -fx-border-width: 1;
 }
+/* Alert settings checkbox */
 #checkbox{
     -fx-background-color:  #FFFFFF;
     -fx-font: 17px "Courier New";
@@ -152,16 +153,7 @@
     -fx-border-width: 1 1 1 1;
     -fx-border-color: #FFFFFF;
 }
-
-/*.text-area {
-    text-area-background: #000000 ;
-    -fx-text-fill: #1b1b1b;
-}
-
-.text-area .content {
-    -fx-background-color: text-area-background ;
-    
-}*/
+/* Change background color of online users list here */
 .list-view {
     -fx-background-color: linear-gradient( #FFFFFF,  #FFFFFF);
     -fx-font: 18px "Courier New";
@@ -203,7 +195,6 @@
 }
 
 .bordered-titled-title {
-  /*-fx-background-color: linear-gradient( #FFFFFF,  #FFFFFF);*/
   -fx-background-color: linear-gradient( #000000,  #000000);
   -fx-translate-y: -15;
 }

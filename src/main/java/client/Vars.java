@@ -7,7 +7,6 @@ import view.mainView;
 /**
  * This class creates instances of the LogoManager,
  * mainView, chatView and loginView classes.
- * @author
  */
 public class Vars {
     public static LogoManager logo = new LogoManager();

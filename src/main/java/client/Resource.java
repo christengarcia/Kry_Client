@@ -5,7 +5,6 @@ import javafx.stage.Screen;
 
 /**
  * This class handles the resources for the chat window's dimensions.
- * @author
  */
 public class Resource {
     public static int WINDOW_WIDTH;

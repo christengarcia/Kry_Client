@@ -1,6 +1,6 @@
 package view;
 
-import Model.UserCell;
+import Model.AlertControls;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
  * turn on/off the incoming sound messages for that
  * specific user.
  */
-public class UserListCell extends ListCell<UserCell> {
+public class UserListCell extends ListCell<AlertControls> {
     private HBox content;
     private Text name;
     private ImageView ring_view;
@@ -35,7 +35,7 @@ public class UserListCell extends ListCell<UserCell> {
     // Updates the the list by adding and displaying
     // a bell next to new active username.
     @Override
-    protected void updateItem(UserCell item, boolean empty) {
+    protected void updateItem(AlertControls item, boolean empty) {
         super.updateItem(item, empty);
         if (item != null && !empty) { // <== test for null item and empty parameter
             name.setText(item.username);
